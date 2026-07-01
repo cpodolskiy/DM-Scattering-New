@@ -5,11 +5,11 @@ from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 from pathlib import Path
 
-h5_file = Path("/home/locsst/Documents/camera/array/full.h5")
-pixel_deg_motor =  0.921202100973  # actual pixel width
+h5_file = Path("run.h5")
+pixel_deg_motor = 0.921202100973  # actual pixel width
 pixel_deg_azimuth = 0.688377359072
 motor_center = 90
-downsample = 1000  # factor to reduce resolution for plotting
+downsample = 45  # factor to reduce resolution for plotting
 motor_step_taken = 0.6
 azimuth_step_taken = 0.9
 

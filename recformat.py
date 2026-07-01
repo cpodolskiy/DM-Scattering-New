@@ -2,8 +2,8 @@ import numpy as np
 import h5py
 from pathlib import Path
 
-input_path = Path("/home/locsst/Documents/camera/array/full.h5")
-output_path = Path("/home/locsst/Documents/camera/array/fullrec.h5")
+input_path = Path("monolongrun.h5")
+output_path = Path("reclongrun.h5")
 
 with h5py.File(input_path, "r") as f_in:
     angles = f_in["angles"][:]
@@ -34,20 +34,20 @@ with h5py.File(input_path, "r") as f_in:
 
         #fill top half
         for i, az in enumerate(azimuths_top):
-            print(f"Filling top half {i}")
             for j, m in enumerate(motor_top):
                 match_idx = np.where((angles[:, 0] == m) & (angles[:, 1] == az))[0]
                 if len(match_idx) > 0:
+                    print(f"Saving {m}")
                     idx = match_idx[0]
                     dset_imgs[i, j] = f_in["images"][idx]
                     dset_motor[i, j] = m
 
         #fill bottom half
         for i, az in enumerate(azimuths_bot, start=len(azimuths_top)):
-            print(f"Filling bottom half {i}")
             for j, m in enumerate(motor_bot):
                 match_idx = np.where((angles[:, 0] == m) & (angles[:, 1] == az))[0]
                 if len(match_idx) > 0:
+                    print(f"Saving {m}")
                     idx = match_idx[0]
                     dset_imgs[i, j] = f_in["images"][idx]
                     dset_motor[i, j] = m
